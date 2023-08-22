@@ -58,8 +58,9 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
+# !!!!!!!!!!!!!!!!!!!!!!!!!! временно! не забыть убрать перед ревью!
+# db.sqlite3
+# db.sqlite3-journal
 
 # Flask stuff:
 instance/

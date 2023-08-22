@@ -51,6 +51,7 @@ class Post(PublishedCreatedModel, TitleModel):
         )
     pub_date = models.DateTimeField(
         blank=False,
+        auto_now_add=True,
         verbose_name='Когда, во-сколько опубликовано:'
         )
     author = models.ForeignKey(

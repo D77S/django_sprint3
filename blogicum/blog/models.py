@@ -20,8 +20,8 @@ class Category(PublishedCreatedModel, TitleModel):
         )
 
     class Meta:
-        verbose_name = 'Тематическая категория'
-        verbose_name_plural = 'Тематические категории'
+        verbose_name = 'категория'
+        verbose_name_plural = 'Категории'
 
     def __str__(self):
         return self.title
@@ -36,8 +36,8 @@ class Location(PublishedCreatedModel):
         )
 
     class Meta:
-        verbose_name = 'Географическая метка'
-        verbose_name_plural = 'Географические метки'
+        verbose_name = 'местоположение'
+        verbose_name_plural = 'Местоположения'
 
     def __str__(self):
         return self.name
@@ -80,7 +80,7 @@ class Post(PublishedCreatedModel, TitleModel):
         )
 
     class Meta:
-        verbose_name = 'Публикация'
+        verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
 
     def __str__(self):

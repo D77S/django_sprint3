@@ -6,11 +6,12 @@ class PublishedCreatedModel(models.Model):
         blank=False,
         default=True,
         verbose_name='Опубликовано',
+        help_text='Снимите галочку, чтобы скрыть публикацию.'
         )
     created_at = models.DateTimeField(
         blank=False,
         auto_now_add=True,
-        verbose_name='Когда, во-сколько создано:'
+        verbose_name='Добавлено'
         )
 
     class Meta:
@@ -22,7 +23,7 @@ class TitleModel(models.Model):
         blank=False,
         max_length=256,
         default='Сначала пусто',
-        verbose_name='Название',
+        verbose_name='Заголовок',
         null=True
         )
 

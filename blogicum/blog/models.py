@@ -10,12 +10,16 @@ class Category(PublishedCreatedModel, TitleModel):
     description = models.TextField(
         blank=False,
         default='Сначала пусто',
-        verbose_name='Текст'
+        verbose_name='Описание'
         )
     slug = models.SlugField(
         blank=False,
         default='Сначала пусто',
-        verbose_name='Слаг',
+        verbose_name='Идентификатор',
+        help_text="""
+        Идентификатор страницы для URL;
+         разрешены символы латиницы, цифры, дефис и подчёркивание.
+        """,
         unique=True
         )
 
@@ -31,7 +35,7 @@ class Location(PublishedCreatedModel):
     name = models.CharField(
         blank=False,
         default='Сначала пусто',
-        verbose_name='Имя локации',
+        verbose_name='Название места',
         max_length=256
         )
 
@@ -52,7 +56,10 @@ class Post(PublishedCreatedModel, TitleModel):
     pub_date = models.DateTimeField(
         blank=False,
         auto_now_add=True,
-        verbose_name='Когда, во-сколько опубликовано:'
+        verbose_name='Дата и время публикации',
+        help_text="""
+        Если установить дату и время в будущем —
+          можно делать отложенные публикации."""
         )
     author = models.ForeignKey(
         User,
@@ -60,7 +67,7 @@ class Post(PublishedCreatedModel, TitleModel):
         null=True,
         default=None,
         on_delete=models.CASCADE,
-        verbose_name='Автор'
+        verbose_name='Автор публикации'
         )
     location = models.ForeignKey(
         Location,
@@ -68,7 +75,7 @@ class Post(PublishedCreatedModel, TitleModel):
         null=True,
         default=None,
         on_delete=models.SET_NULL,
-        verbose_name='Локация'
+        verbose_name='Местоположение'
         )
     category = models.ForeignKey(
         Category,

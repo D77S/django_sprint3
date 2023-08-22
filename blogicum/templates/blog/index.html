@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Лента записей
+{% endblock %}
+
+{% block content %}
+  <h1>Лента записей</h1>                        
+  {% for post in temporary_posts_transfer reversed %}
+    <article>
+      {% include "includes/post_attributes.html" %}          
+      <p>
+        {{ post.text|truncatewords:10|safe }}
+      </p>
+      <a href="{% url 'blog:post_detail' post.id %}">
+      Читать полный текст</a>
+    </article>
+    {% if forloop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

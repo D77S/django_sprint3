@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import datetime
 
 
 class PublishedCreatedModel(models.Model):
@@ -10,7 +9,7 @@ class PublishedCreatedModel(models.Model):
         )
     created_at = models.DateTimeField(
         blank=False,
-        default=datetime.now,
+        auto_now_add=True,
         verbose_name='Когда, во-сколько создано:'
         )
 

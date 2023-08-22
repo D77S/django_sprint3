@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from django.db import models
 from django.contrib.auth import get_user_model
 
@@ -20,6 +19,13 @@ class Category(PublishedCreatedModel, TitleModel):
         unique=True
         )
 
+    class Meta:
+        verbose_name = 'Тематическая категория'
+        verbose_name_plural = 'Тематические категории'
+
+    def __str__(self):
+        return self.title
+
 
 class Location(PublishedCreatedModel):
     name = models.CharField(
@@ -28,6 +34,13 @@ class Location(PublishedCreatedModel):
         verbose_name='Имя локации',
         max_length=256
         )
+
+    class Meta:
+        verbose_name = 'Географическая метка'
+        verbose_name_plural = 'Географические метки'
+
+    def __str__(self):
+        return self.name
 
 
 class Post(PublishedCreatedModel, TitleModel):
@@ -44,7 +57,7 @@ class Post(PublishedCreatedModel, TitleModel):
         User,
         blank=False,
         null=True,
-        default=NULL,
+        default=None,
         on_delete=models.CASCADE,
         verbose_name='Автор'
         )
@@ -52,7 +65,7 @@ class Post(PublishedCreatedModel, TitleModel):
         Location,
         blank=True,
         null=True,
-        default=NULL,
+        default=None,
         on_delete=models.SET_NULL,
         verbose_name='Локация'
         )
@@ -60,7 +73,7 @@ class Post(PublishedCreatedModel, TitleModel):
         Category,
         blank=False,
         null=True,
-        default=NULL,
+        default=None,
         on_delete=models.SET_NULL,
         verbose_name='Категория'
         )
@@ -68,7 +81,6 @@ class Post(PublishedCreatedModel, TitleModel):
     class Meta:
         verbose_name = 'Публикация'
         verbose_name_plural = 'Публикации'
-        ordering = ('title',)
 
     def __str__(self):
         return self.title

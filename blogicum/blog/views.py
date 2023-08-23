@@ -1,35 +1,37 @@
 from django.http import HttpResponse
-from django.shortcuts import get_list_or_404, render
+from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.utils import timezone
 from datetime import datetime
 
-from blog.models import Post
+from blog.models import Post, Category
 
 
 def index(request) -> HttpResponse:
     posts = Post.objects.filter(
         is_published=True,
         category__is_published=True,
-        pub_date__lte=datetime.now()
+        pub_date__lte=datetime.now(tz=timezone.utc)
         ).order_by('-pub_date')[:5]
     context = {'post_list': posts, }
     return render(request, 'blog/index.html', context)
 
 
 def post_detail(request, id: int) -> HttpResponse:
-    context = {'post': posts[id]}
+    post1 = Post.objects.select_related('category').filter(pk=id,
+                                                           is_published=True)
+    post = get_object_or_404(post1, category__is_published=True)
+    context = {'post': post}
+    print(context)
     return render(request, 'blog/detail.html', context)
 
 
 def category_posts(request, category_slug: str) -> HttpResponse:
-    posts = get_list_or_404(
-        Post.objects.select_related('category').filter(
+    posts1 = Post.objects.select_related('category').filter(
             category__slug=category_slug,
-            is_published=True,
             category__is_published=True,
-            pub_date__lte=datetime.now()
-            ).order_by('-pub_date'),
-        is_published=True
-        )
-    context = {'post_list': posts}
-    print(context)
+            pub_date__lte=datetime.now(tz=timezone.utc)
+            ).order_by('-pub_date')
+    cat1 = Category.objects.get(slug=category_slug)
+    posts = get_list_or_404(posts1, is_published=True)
+    context = {'post_list': posts, 'category': cat1}
     return render(request, 'blog/category.html', context)

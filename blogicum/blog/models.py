@@ -9,17 +9,15 @@ User = get_user_model()
 class Category(PublishedCreatedModel, TitleModel):
     description = models.TextField(
         blank=False,
-        default='Сначала пусто',
+        default='Empty',
         verbose_name='Описание'
         )
     slug = models.SlugField(
         blank=False,
-        default='Сначала пусто',
+        default='Empty',
         verbose_name='Идентификатор',
-        help_text="""
-        Идентификатор страницы для URL;
-         разрешены символы латиницы, цифры, дефис и подчёркивание.
-        """,
+        help_text='Идентификатор страницы для URL; '
+                  'разрешены символы латиницы, цифры, дефис и подчёркивание.',
         unique=True
         )
 
@@ -34,7 +32,7 @@ class Category(PublishedCreatedModel, TitleModel):
 class Location(PublishedCreatedModel):
     name = models.CharField(
         blank=False,
-        default='Сначала пусто',
+        default='Empty',
         verbose_name='Название места',
         max_length=256
         )
@@ -50,21 +48,21 @@ class Location(PublishedCreatedModel):
 class Post(PublishedCreatedModel, TitleModel):
     text = models.TextField(
         blank=False,
-        default='Сначала пусто',
+        default='Empty',
         verbose_name='Текст'
         )
     pub_date = models.DateTimeField(
         blank=False,
-        auto_now_add=True,
+        auto_now_add=False,
+        auto_now=False,
         verbose_name='Дата и время публикации',
-        help_text="""
-        Если установить дату и время в будущем —
-          можно делать отложенные публикации."""
+        help_text='Если установить дату и время в будущем — '
+                  'можно делать отложенные публикации.'
         )
     author = models.ForeignKey(
         User,
         blank=False,
-        null=True,
+        null=False,
         default=None,
         on_delete=models.CASCADE,
         verbose_name='Автор публикации'

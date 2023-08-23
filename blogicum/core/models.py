@@ -22,7 +22,7 @@ class TitleModel(models.Model):
     title = models.CharField(
         blank=False,
         max_length=256,
-        default='Сначала пусто',
+        default='Empty',
         verbose_name='Заголовок',
         null=True
         )

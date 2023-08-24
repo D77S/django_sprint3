@@ -17,11 +17,12 @@ def index(request) -> HttpResponse:
 
 
 def post_detail(request, id: int) -> HttpResponse:
-    post1 = Post.objects.select_related('category').filter(pk=id,
-                                                           is_published=True)
-    post = get_object_or_404(post1, category__is_published=True)
+    post1 = Post.objects.select_related(
+        'category').filter(pk=id, is_published=True,
+                           category__is_published=True)
+    post = get_object_or_404(
+        post1, pub_date__lte=datetime.now(tz=timezone.utc))
     context = {'post': post}
-    print(context)
     return render(request, 'blog/detail.html', context)
 
 

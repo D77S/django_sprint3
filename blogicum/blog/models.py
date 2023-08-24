@@ -7,16 +7,16 @@ User = get_user_model()
 
 
 class Category(PublishedCreatedModel, TitleModel):
-    description = models.TextField(
-        blank=False,
-        default='Empty',
-        verbose_name='Описание')
-    slug = models.SlugField(
-        blank=False,
-        verbose_name='Идентификатор',
-        help_text='Идентификатор страницы для URL; '
-                  'разрешены символы латиницы, цифры, дефис и подчёркивание.',
-        unique=True)
+    description = models.TextField(blank=False,
+                                   default='Empty',
+                                   verbose_name='Описание'
+                                   )
+    slug = models.SlugField(blank=False,
+                            verbose_name='Идентификатор',
+                            help_text='Идентификатор страницы для URL; '
+                            'разрешены символы латиницы, цифры, дефис и подчёркивание.',
+                            unique=True
+                            )
 
     class Meta:
         verbose_name = 'категория'
@@ -27,11 +27,11 @@ class Category(PublishedCreatedModel, TitleModel):
 
 
 class Location(PublishedCreatedModel):
-    name = models.CharField(
-        blank=False,
-        default='Empty',
-        verbose_name='Название места',
-        max_length=256)
+    name = models.CharField(blank=False,
+                            default='Empty',
+                            verbose_name='Название места',
+                            max_length=256
+                            )
 
     class Meta:
         verbose_name = 'местоположение'

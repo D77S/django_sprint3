@@ -14,7 +14,6 @@ class Category(PublishedCreatedModel, TitleModel):
         )
     slug = models.SlugField(
         blank=False,
-        default='Empty',
         verbose_name='Идентификатор',
         help_text='Идентификатор страницы для URL; '
                   'разрешены символы латиницы, цифры, дефис и подчёркивание.',
@@ -63,7 +62,6 @@ class Post(PublishedCreatedModel, TitleModel):
         User,
         blank=False,
         null=False,
-        default=None,
         on_delete=models.CASCADE,
         verbose_name='Автор публикации'
         )
@@ -79,7 +77,6 @@ class Post(PublishedCreatedModel, TitleModel):
         Category,
         blank=False,
         null=True,
-        default=None,
         on_delete=models.SET_NULL,
         verbose_name='Категория'
         )

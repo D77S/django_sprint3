@@ -9,15 +9,13 @@ User = get_user_model()
 class Category(PublishedCreatedModel, TitleModel):
     description = models.TextField(blank=False,
                                    default='Empty',
-                                   verbose_name='Описание'
-                                   )
+                                   verbose_name='Описание')
     temp_slug = 'Идентификатор страницы для URL; '
     'разрешены символы латиницы, цифры, дефис и подчёркивание.'
     slug = models.SlugField(blank=False,
                             verbose_name='Идентификатор',
                             help_text=temp_slug,
-                            unique=True
-                            )
+                            unique=True)
 
     class Meta:
         verbose_name = 'категория'
@@ -31,8 +29,7 @@ class Location(PublishedCreatedModel):
     name = models.CharField(blank=False,
                             default='Empty',
                             verbose_name='Название места',
-                            max_length=256
-                            )
+                            max_length=256)
 
     class Meta:
         verbose_name = 'местоположение'

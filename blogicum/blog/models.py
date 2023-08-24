@@ -11,10 +11,11 @@ class Category(PublishedCreatedModel, TitleModel):
                                    default='Empty',
                                    verbose_name='Описание'
                                    )
+    temp_slug = 'Идентификатор страницы для URL; '
+    'разрешены символы латиницы, цифры, дефис и подчёркивание.'
     slug = models.SlugField(blank=False,
                             verbose_name='Идентификатор',
-                            help_text='Идентификатор страницы для URL; '
-                            'разрешены символы латиницы, цифры, дефис и подчёркивание.',
+                            help_text=temp_slug,
                             unique=True
                             )
 

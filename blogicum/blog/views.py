@@ -10,7 +10,8 @@ def index(request) -> HttpResponse:
     posts = Post.objects.filter(
         is_published=True,
         category__is_published=True,
-        pub_date__lte=datetime.now(tz=timezone.utc)
+        #  pub_date__lte=datetime.now(tz=timezone.utc)
+        pub_date__lte=timezone.now()
         ).order_by('-pub_date')[:5]
     context = {'post_list': posts, }
     return render(request, 'blog/index.html', context)
@@ -21,7 +22,7 @@ def post_detail(request, id: int) -> HttpResponse:
         'category').filter(pk=id, is_published=True,
                            category__is_published=True)
     post = get_object_or_404(
-        post1, pub_date__lte=datetime.now(tz=timezone.utc))
+        post1, pub_date__lte=timezone.now())
     context = {'post': post}
     return render(request, 'blog/detail.html', context)
 
@@ -36,8 +37,7 @@ def category_posts(request, category_slug: str) -> HttpResponse:
             category__is_published=True,
             pub_date__lte=datetime.now(tz=timezone.utc)
             ).order_by(
-                '-pub_date'
-                )
+                '-pub_date')
     cat1 = Category.objects.get(slug=category_slug)
     posts = get_list_or_404(posts1, is_published=True)
     context = {'post_list': posts, 'category': cat1}

@@ -7,15 +7,19 @@ User = get_user_model()
 
 
 class Category(PublishedCreatedModel, TitleModel):
-    description = models.TextField(blank=False,
-                                   default='Empty',
-                                   verbose_name='Описание')
+    description = models.TextField(
+        blank=False,
+        default='Empty',
+        verbose_name='Описание'
+    )
     temp_slug = 'Идентификатор страницы для URL; '
     'разрешены символы латиницы, цифры, дефис и подчёркивание.'
-    slug = models.SlugField(blank=False,
-                            verbose_name='Идентификатор',
-                            help_text=temp_slug,
-                            unique=True)
+    slug = models.SlugField(
+        blank=False,
+        verbose_name='Идентификатор',
+        help_text=temp_slug,
+        unique=True
+    )
 
     class Meta:
         verbose_name = 'категория'
@@ -26,10 +30,12 @@ class Category(PublishedCreatedModel, TitleModel):
 
 
 class Location(PublishedCreatedModel):
-    name = models.CharField(blank=False,
-                            default='Empty',
-                            verbose_name='Название места',
-                            max_length=256)
+    name = models.CharField(
+        blank=False,
+        default='Empty',
+        verbose_name='Название места',
+        max_length=256
+    )
 
     class Meta:
         verbose_name = 'местоположение'
@@ -43,33 +49,38 @@ class Post(PublishedCreatedModel, TitleModel):
     text = models.TextField(
         blank=False,
         default='Empty',
-        verbose_name='Текст')
+        verbose_name='Текст'
+    )
     pub_date = models.DateTimeField(
         blank=False,
         auto_now_add=False,
         auto_now=False,
         verbose_name='Дата и время публикации',
         help_text='Если установить дату и время в будущем — '
-                  'можно делать отложенные публикации.')
+                  'можно делать отложенные публикации.'
+    )
     author = models.ForeignKey(
         User,
         blank=False,
         null=False,
         on_delete=models.CASCADE,
-        verbose_name='Автор публикации')
+        verbose_name='Автор публикации'
+    )
     location = models.ForeignKey(
         Location,
         blank=True,
         null=True,
         default=None,
         on_delete=models.SET_NULL,
-        verbose_name='Местоположение')
+        verbose_name='Местоположение'
+    )
     category = models.ForeignKey(
         Category,
         blank=False,
         null=True,
         on_delete=models.SET_NULL,
-        verbose_name='Категория')
+        verbose_name='Категория'
+    )
 
     class Meta:
         verbose_name = 'публикация'

@@ -38,6 +38,8 @@ class Category(PublishedCreatedModel, TitleModel):
         verbose_name_plural = 'Категории'
 
     def __str__(self):
+        if len(str(self.title)) >= 30:
+            return str(self.title)[:30]+'...'
         return self.title
 
 
@@ -54,6 +56,8 @@ class Location(PublishedCreatedModel):
         verbose_name_plural = 'Местоположения'
 
     def __str__(self):
+        if len(str(self.name)) >= 30:
+            return str(self.name)[:30]+'...'
         return self.name
 
 
@@ -99,4 +103,6 @@ class Post(PublishedCreatedModel, TitleModel):
         verbose_name_plural = 'Публикации'
 
     def __str__(self):
+        if len(str(self.title)) >= 30:
+            return str(self.title)[:30]+'...'
         return self.title

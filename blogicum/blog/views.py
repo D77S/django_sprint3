@@ -1,9 +1,8 @@
+from blog.models import Category, Post
 from django.db.models import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.utils import timezone
-
-from blog.models import Post, Category
 
 
 def posts_selected() -> QuerySet:

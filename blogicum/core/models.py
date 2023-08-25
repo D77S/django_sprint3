@@ -16,16 +16,3 @@ class PublishedCreatedModel(models.Model):
 
     class Meta:
         abstract = True
-
-
-class TitleModel(models.Model):
-    title = models.CharField(
-        blank=False,
-        max_length=256,
-        default='Empty',
-        verbose_name='Заголовок',
-        null=True
-    )
-
-    class Meta:
-        abstract = True

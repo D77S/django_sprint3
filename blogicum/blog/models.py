@@ -1,9 +1,22 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from core.models import PublishedCreatedModel, TitleModel
+from core.models import PublishedCreatedModel
 
 User = get_user_model()
+
+
+class TitleModel(models.Model):
+    title = models.CharField(
+        blank=False,
+        max_length=256,
+        default='Empty',
+        verbose_name='Заголовок',
+        null=True
+    )
+
+    class Meta:
+        abstract = True
 
 
 class Category(PublishedCreatedModel, TitleModel):

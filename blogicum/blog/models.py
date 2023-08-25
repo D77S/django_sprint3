@@ -39,7 +39,7 @@ class Category(PublishedCreatedModel, TitleModel):
 
     def __str__(self):
         if len(str(self.title)) >= 30:
-            return str(self.title)[:30]+'...'
+            return str(self.title)[:30] + '...'
         return self.title
 
 
@@ -57,7 +57,7 @@ class Location(PublishedCreatedModel):
 
     def __str__(self):
         if len(str(self.name)) >= 30:
-            return str(self.name)[:30]+'...'
+            return str(self.name)[:30] + '...'
         return self.name
 
 
@@ -104,5 +104,5 @@ class Post(PublishedCreatedModel, TitleModel):
 
     def __str__(self):
         if len(str(self.title)) >= 30:
-            return str(self.title)[:30]+'...'
+            return str(self.title)[:30] + '...'
         return self.title

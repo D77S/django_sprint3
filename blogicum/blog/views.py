@@ -16,8 +16,7 @@ def posts_selected() -> QuerySet:
     return Post.objects.select_related(
         'category',
         'location',
-        'author'
-                                      )
+        'author')
 
 
 def index(request) -> HttpResponse:
@@ -25,8 +24,8 @@ def index(request) -> HttpResponse:
     posts = posts_selected().filter(
         is_published=True,
         category__is_published=True,
-        pub_date__lte=timezone.now()
-                                   ).order_by('-pub_date')[:TRUNCATE_STRING_TO]
+        pub_date__lte=timezone.now()).order_by(
+            '-pub_date')[:TRUNCATE_STRING_TO]
     context = {'post_list': posts, }
     return render(request, 'blog/index.html', context)
 
@@ -56,8 +55,8 @@ def category_posts(request, category_slug: str) -> HttpResponse:
         posts_selected().filter(
             category__slug=category_slug,
             category__is_published=True,
-            pub_date__lte=timezone.now()
-            ).order_by('-pub_date'), is_published=True)
+            pub_date__lte=timezone.now()).order_by(
+                '-pub_date'), is_published=True)
     selected_category_or_404 = get_object_or_404(
         Category.objects.all(),
         slug=category_slug)

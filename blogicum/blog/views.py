@@ -17,7 +17,7 @@ def posts_selected() -> QuerySet:
         'category',
         'location',
         'author'
-        )
+                                      )
 
 
 def index(request) -> HttpResponse:
@@ -26,7 +26,7 @@ def index(request) -> HttpResponse:
         is_published=True,
         category__is_published=True,
         pub_date__lte=timezone.now()
-        ).order_by('-pub_date')[:TRUNCATE_STRING_TO]
+                                   ).order_by('-pub_date')[:TRUNCATE_STRING_TO]
     context = {'post_list': posts, }
     return render(request, 'blog/index.html', context)
 
